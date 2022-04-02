@@ -10,7 +10,7 @@ app.get('/', (req, res) => {
         layout, 
         title: 'Portfolio', 
         message: req.flash('message'), 
-        haveBlog
+        // haveBlog
     })
 })
 
