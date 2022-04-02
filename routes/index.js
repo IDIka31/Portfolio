@@ -6,20 +6,24 @@ const app = express.Router();
 const layout = 'layouts/main-layouts'
 
 app.get('/', (req, res) => {
-    return res.render('index', { layout, title: 'Portfolio', message: req.flash('message'), })
+    return res.render('index', { 
+        layout, 
+        title: 'Portfolio', 
+        message: req.flash('message'), 
+        haveBlog
+    })
 })
 
 app.post('/', async (req, res) => {
     const body = req.body;
-    const testAccount = await nodemailer.createTestAccount();
 
     const transporter = nodemailer.createTransport({
-        host: 'smtp.ethereal.email',
+        host: 'smtp.mailgun.org',
         port: 587,
-        secure: false, // true for 465, false for other ports
+        secure: false,
         auth: {
-            user: testAccount.user, // generated ethereal user
-            pass: testAccount.pass, // generated ethereal password
+            user: 'postmaster@sandbox78701b9f532340a59c3048c718003477.mailgun.org',
+            pass: '9655f63086425ae697698ed818b22733-62916a6c-1e1d8f4c',
         },
     });
 
