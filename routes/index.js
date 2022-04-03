@@ -5,12 +5,27 @@ const app = express.Router();
 
 const layout = 'layouts/main-layouts'
 
-app.get('/', (req, res) => {
+const blog = require('../database/model/blog');
+
+// sort array to a page
+const sortArray = (array, page, limit) => {
+    const start = (page - 1) * limit;
+    const end = page * limit;
+    return array.slice(start, end);
+}
+
+app.get('/', async (req, res) => {
+    const query = req.query;
+    const page = query.page ? query.page : 1;
+
+    const haveBlog = await blog.find();
+    
     return res.render('index', { 
         layout, 
         title: 'Portfolio', 
         message: req.flash('message'), 
-        // haveBlog
+        haveBlog,
+        blog: sortArray(haveBlog, page, 4)
     })
 })
 

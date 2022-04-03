@@ -53,7 +53,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 const Router = require('./routes/index');
 app.use(Router);
 
+// Database
+const { connectToDB } = require('./database/mongo.db');
+
 // APP Listen
 app.listen(config.PORT, () => {
     console.log(`Server started on port: ${config.PORT}`);
+
+    connectToDB(config.mongoDBURI)
+        .then((res) => {
+            console.log(res);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 });
