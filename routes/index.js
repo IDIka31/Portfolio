@@ -16,16 +16,15 @@ const sortArray = (array, page, limit) => {
 
 app.get('/', async (req, res) => {
     const query = req.query;
-    const page = query.page ? query.page : 1;
 
     const haveBlog = await blog.find();
-    
+
     return res.render('index', { 
         layout, 
         title: 'Portfolio', 
         message: req.flash('message'), 
         haveBlog,
-        blog: sortArray(haveBlog, page, 4)
+        blogs: sortArray(haveBlog, 1, 6)
     })
 })
 

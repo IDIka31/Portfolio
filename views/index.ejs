@@ -151,17 +151,33 @@
                 <h2 class="font-bold text-dark text-2xl mb-4 sm:text-3xl lg:text-4xl">Latest Article</h2>
             </div>
             <div class="flex flex-wrap justify-center">
-                <div class="w-full px-4 lg:w-1/2 xl:w-1/3">
-                    <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-10">
-                        <div class="py-8 px-6">
-                            <h3>
-                                <a href="#" class="font-semibold text-xl text-dark block mb-3 hover:text-primary transition duration-300 truncate">Judul Blog 1</a>
-                            </h3>
-                            <p class="font-medium text-base text-secondary mb-6">Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, necessitatibus? Suscipit molestiae consequuntur dolore amet necessitatibus ad at corporis. Officia.</p>
-                            <a href="#" class="font-medium text-sm text-white bg-primary py-2 px-4 rounded-lg hover:opacity-80">Read more</a>
+                <% if (haveBlog.length > 0) { %>
+                    <% blogs.forEach(blog => { %>
+                        <div class="w-full px-4 lg:w-1/2 xl:w-1/3">
+                            <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-10">
+                                <div class="py-8 px-6">
+                                    <h3>
+                                        <a href="#" class="font-semibold text-xl text-dark block mb-3 hover:text-primary transition duration-300 truncate"><%= blog.title %></a>
+                                    </h3>
+                                    <p class="font-medium text-base text-secondary mb-6 truncate"><%= blog.content %></p>
+                                    <a href="/blog/read/<%= blog._id.toString() %>" class="font-medium text-sm text-white bg-primary py-2 px-4 rounded-lg hover:opacity-80">Read more</a>
+                                </div>
+                            </div>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <div class="w-full px-4 lg:w-1/2 xl:w-1/3">
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-10">
+                            <div class="py-8 px-6">
+                                <h3>
+                                    <a href="#" class="font-semibold text-xl text-dark block mb-3 hover:text-primary transition duration-300 truncate">Judul Blog 1</a>
+                                </h3>
+                                <p class="font-medium text-base text-secondary mb-6">Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, necessitatibus? Suscipit molestiae consequuntur dolore amet necessitatibus ad at corporis. Officia.</p>
+                                <a href="#" class="font-medium text-sm text-white bg-primary py-2 px-4 rounded-lg hover:opacity-80">Read more</a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                <% } %>
             </div>
         </div>
     </div>
