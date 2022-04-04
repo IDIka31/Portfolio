@@ -251,7 +251,7 @@ app.get('/blog/read/:_id', async (req, res) => {
     blog.findById(req.params._id)
         .then((v) => {
             return res.render('read', {
-                layout,
+                layout: adminLayout,
                 title: v.title,
                 content: v.content,
             });
