@@ -82,13 +82,20 @@ app.get('/', async (req, res) => {
         message: req.flash('message'),
         haveBlog,
         blogs: sortArray(haveBlog, 1, 6),
+        isLogin: req.isAuthenticated(),
     });
 });
 
 // Admin Login
 app.get('/admin', async (req, res) => {
     if (req.user) return res.redirect('/admin/dashboard');
-    return res.render('admin', { layout: adminLayout, title: 'Admin Login', message: req.flash('message'), error: req.flash('error') });
+    return res.render('admin', {
+        layout: adminLayout,
+        title: 'Admin Login',
+        message: req.flash('message'),
+        error: req.flash('error'),
+        isLogin: req.isAuthenticated(),
+    });
 });
 
 // Admin Dashboard
@@ -101,12 +108,18 @@ app.get('/admin/dashboard', ensureLoggedIn(), async (req, res) => {
         message: req.flash('message'),
         error: req.flash('error'),
         blogs,
+        isLogin: req.isAuthenticated(),
     });
 });
 
 // Create Blog
 app.get('/admin/blog/create', ensureLoggedIn(), async (req, res) => {
-    return res.render('create-blog', { layout: adminLayout, title: 'Create Blog', error: req.flash('error') });
+    return res.render('create-blog', {
+        layout: adminLayout,
+        title: 'Create Blog',
+        error: req.flash('error'),
+        isLogin: req.isAuthenticated(),
+    });
 });
 
 // Edit Blog
@@ -123,6 +136,7 @@ app.get('/admin/blog/edit/:_id', ensureLoggedIn(), (req, res) => {
             success: req.flash('success'),
             error: req.flash('error'),
             blog,
+            isLogin: req.isAuthenticated(),
         });
     });
 });
@@ -254,6 +268,7 @@ app.get('/blog/read/:_id', async (req, res) => {
                 layout: adminLayout,
                 title: v.title,
                 content: v.content,
+                isLogin: req.isAuthenticated(),
             });
         })
         .catch(() => {
