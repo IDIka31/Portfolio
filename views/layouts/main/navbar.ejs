@@ -32,7 +32,7 @@
                             <a href="/#contact" class="text-base text-dark py-2 mx-8 flex group-hover:text-primary transition duration-300">Contact Me</a>
                         </li>
                         <li class="group">
-                            <% if (!isLogin) { %>
+                            <% if (isLogin) { %>
                             <a href="/admin/dashboard" class="text-base text-dark py-2 mx-8 flex group-hover:text-primary lg:rounded-full lg:group-hover:shadow-lg lg:group-hover:opacity-80 transition duration-500 lg:font-semibold lg:bg-primary lg:text-white lg:px-8 lg:group-hover:text-white">Dashboard</a>
                             <% } else { %>
                             <a href="/admin" class="text-base text-dark py-2 mx-8 flex group-hover:text-primary lg:rounded-full lg:group-hover:shadow-lg lg:group-hover:opacity-80 transition duration-500 lg:font-semibold lg:bg-primary lg:text-white lg:px-8 lg:group-hover:text-white">Login</a>
