@@ -1,0 +1,47 @@
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-9">
+            <h2>Blog List</h2>
+
+            <% if (message.length !== 0) { %>
+            <div class="alert alert-success" role="alert"><%= message %></div>
+            <% } %>
+            <% if (error.length !== 0) { %>
+            <div class="alert alert-danger" role="alert"><%= error %></div>
+            <% } %>
+            <a href="/admin/blog/create/" class="btn btn-primary mb-2">Create Blog</a>
+            <a href="/admin/logout" class="btn btn-danger mb-2">Logout</a>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col truncate">Title</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (!blogs || blogs.length == 0) { %>
+                    <tr>
+                        <td colspan="4">
+                            <div class="alert alert-danger" role="alert">No blog found.</div>
+                        </td>
+                    </tr>
+                    <% } %> <% blogs.forEach((blog, i) => { %>
+                    <tr>
+                        <th scope="row"><%= i+1 %></th>
+                        <td><%= blog.title %></td>
+                        <td>
+                            <a href="/admin/blog/edit/<%= blog._id.toString() %>" class="btn btn-warning badge rounded-pill"><i class="bi bi-pencil-square"></i> Edit</a>
+                            <form method="post" action="/admin/blog" class="d-inline">
+                                <input type="hidden" name="_method" value="delete" />
+                                <input type="hidden" name="_id" value="<%= blog._id.toString() %>" />
+                                <button type="submit" class="btn btn-danger badge rounded-pill"><i class="bi bi-trash3-fill"></i> Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+<section class="pt-36 pb-32">
+    <div class="container">
+        <% if (error.length > 0) { %>
+        <div class="w-full px-4 lg:w-2/3 lg:mx-auto">
+            <div class="mx-w-xl mx-auto text-center mb-12">
+                <div class="bg-red-500 border border-red-600 text-white px-4 py-3 rounded relative" role="alert">
+                    <ul>
+                        <% error.forEach(function(err) { %>
+                        <li class="block sm:inline"><%= err.msg %></li>
+                        <% }) %>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <% } %>
+        <form action="/admin/blog" method="post">
+            <div class="w-full lg:w-2/3 lg:mx-auto">
+                <div class="w-full px-4 mb-8">
+                    <label for="title" class="font-bold text-base text-primary">Title</label>
+                    <input type="text" id="title" class="w-full bg-slate-200 text-dark p-3 rounded-md focus:outline-none focus:ring-primary focus:ring-1 focus:border-primary" name="title" required />
+                </div>
+                <div class="w-full px-4 mb-8">
+                    <label for="content" class="font-bold text-base text-primary">Content</label>
+                    <textarea type="text" id="content" class="w-full bg-slate-200 text-dark p-3 rounded-md focus:outline-none focus:ring-primary focus:ring-1 focus:border-primary h-32" name="content" required></textarea>
+                </div>
+                <div class="w-full px-4">
+                    <button class="font-semibold text-base text-white bg-primary py-3 px-8 rounded-full w-full hover:opacity-80 hover:shadow-lg transition duration-500">Create</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>

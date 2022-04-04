@@ -12,6 +12,7 @@ const path = require('path');
 const session = require('express-session');
 const flash = require('connect-flash');
 const cookieParser = require('cookie-parser');
+const methodOverride = require('method-override');
 
 // APP
 const app = express();
@@ -28,16 +29,25 @@ app.use(cors());
 app.use(compression());
 app.use(ejsLayouts);
 
+// Setting method override
+app.use(
+    methodOverride((req, res) => {
+        if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+            // look in urlencoded POST bodies and delete it
+            const method = req.body._method;
+            delete req.body._method;
+            return method;
+        }
+    })
+);
+
 // Setting Flash
 app.use(cookieParser());
 app.use(
     session({
-        cookie: {
-            maxAge: 6000,
-        },
         secret: config.sessionSecret,
         resave: true,
-        saveUninitialized: true,
+        saveUninitialized: false,
     })
 );
 app.use(flash());
