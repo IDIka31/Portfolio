@@ -106,7 +106,7 @@ app.get('/admin/dashboard', ensureLoggedIn(), async (req, res) => {
 
 // Create Blog
 app.get('/admin/blog/create', ensureLoggedIn(), async (req, res) => {
-    return res.render('create-blog', { layout: adminLayout, title: 'Create Blog' });
+    return res.render('create-blog', { layout: adminLayout, title: 'Create Blog', error: req.flash('error') });
 });
 
 // Edit Blog
